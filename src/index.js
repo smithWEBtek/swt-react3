@@ -1,26 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const MOUNT = document.querySelector('#root');
+const { Component } = React
+const names = ['Harry', 'Mary', 'Larry', 'Perry']
 
-class Tweet extends React.Component {
-  render() {
-    return (
-      <div className="tweet">
-        <img src="http://twitter.com/some-avatar.png" className="tweet__avatar" />
-        <div className="tweet__body">
-            <p>We are writing this tweet in JSX. Holy moly!</p>  
-        </div>
-      </div>
-    );
-  }
+class Guest extends Component {
+	render() {
+		const { name }  = this.props
+
+		return(
+			<div className='guest'>
+				<input type='checkbox' />
+				{ name }
+			</div>
+		)
+	}
 }
 
+const GuestBookApp = () => (
+	<div className = 'guestbook'>
+		Hello from GuestBookApp
+	</div>
+)
+
 ReactDOM.render(
-  <Tweet />,
-  document.getElementById('main')
+	<GuestBookApp />,
+	MOUNT
 );
