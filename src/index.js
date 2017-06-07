@@ -3,21 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const MOUNT = document.getElementById('root');
-const { Component } = React;
+const { Component } = React
 
-const names = ['Ned', 'Ted', 'Fred', 'Zed', 'Mary', 'Ned', 'Ted'];
+const names = ['Ned', 'Ted', 'Fred', 'Zed', 'Mary', 'Ned', 'Ted']
 
 const Guest = ({ name, rsvpd, onRSVP }) => (
 	<div className={`guest ${rsvpd && 'active'}`}>
 		<input
 			onChange={onRSVP}
 			type='checkbox' />
-		{ name }
 	</div>
 )
 
-const GuestbookApp = () => (
-	constructor(props){
+class GuestbookApp extends Component {
+	constructor(props) {
 		super(props)
 		const { names } = this.props
 		/**
@@ -33,7 +32,8 @@ const GuestbookApp = () => (
 	}
 
 	onRSVP = (name, evt) => {
-		const { guests } = !guests[name] //flip value
+		const { guests } = this.state
+		guests[name] = !guests[name] //flip value
 		this.setState({ guests })
 	}
 
@@ -49,7 +49,7 @@ const GuestbookApp = () => (
 					name={name} />
 			))}
 		</div>
+		)
 	}
-}
 
-ReactDOM.render(<GuestbookApp />, MOUNT)
+ReactDOM.render(<GuestbookApp names={names} />, MOUNT);
