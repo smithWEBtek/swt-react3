@@ -22,3 +22,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.guest {
+	color: rgba(2, 12, 18, 1);
+}
+.active {
+	color: rgba(15, 22, 244, 0.8);
+}
