@@ -3,20 +3,53 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const MOUNT = document.getElementById('root');
-// const Hello = (props) => <div>Hello {props.name}!</div>
-// ReactDOM.render(<Hello name='Brad'/>, MOUNT);
+const { Component } = React;
 
+const names = ['Ned', 'Ted', 'Fred', 'Zed', 'Mary', 'Ned', 'Ted'];
 
-const Hello = ({name}) => (
-	<div>Hello {name}!</div>
+const Guest = ({ name, rsvpd, onRSVP }) => (
+	<div className={`guest ${rsvpd && 'active'}`}>
+		<input
+			onChange={onRSVP}
+			type='checkbox' />
+		{ name }
+	</div>
 )
-// ReactDOM.render(<Hello name='Bradley'/>, MOUNT);
 
-const name = 'Bradley J';
-ReactDOM.render(
-	React.createElement(Hello, {name: name}),
-	MOUNT
-	);
+const GuestbookApp = () => (
+	constructor(props){
+		super(props)
+		const { names } = this.props
+		/**
+		* Convert a list of names to an object
+		* with their name and rspv value
+		**/
+		const guests = names.reduce((sum, name) => ({
+			...sum, //total list so far
+			[name]: false, // current name and their rsvp value
+		}), {})
 
-	// 2 elements of the render function
-	// spells out what JS sees when we use <Hello name='Bradley' />
+		this.state = { guests }
+	}
+
+	onRSVP = (name, evt) => {
+		const { guests } = !guests[name] //flip value
+		this.setState({ guests })
+	}
+
+	render() {
+		const { guests } = this.state
+		return (
+		<div className='guestbook'>
+			{Object.keys(guests).map(name => (
+				<Guest
+					key={name}
+					onRSVP={this.onRSVP.bind(this, name)}
+					rsvpd={guests[name]}
+					name={name} />
+			))}
+		</div>
+	}
+}
+
+ReactDOM.render(<GuestbookApp />, MOUNT)

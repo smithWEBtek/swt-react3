@@ -6,21 +6,40 @@ import './index.css';
 
 const MOUNT = document.querySelector('#root');
 const { Component } = React
-const Hello = ({ name }) => (<div>Hello {name}</div>)                                                        
 const names = ['Harry', 'Mary', 'Larry', 'Perry']
 
-class App extends Component {
-  render() {                          
-		return (
-			<div className='app'>
-				{names.map(name => (
-					<Hello
-						key={name}
-						name={name} />)
-				)}
+class Guest extends Component {
+	constructor(props){
+		super(props);
+
+		this.state = {
+			rsvpd: false
+		}
+	}
+
+	render() {
+		const { name }  = this.props
+		const { rsvpd } = this.state
+
+		return(
+			<div 
+				className={'guest' 
+				${rsvpd} && 'active'}>
+					<input type='checkbox' 
+				/>
+				{ name }
 			</div>
 		)
 	}
 }
 
-ReactDOM.render(<App />, MOUNT);
+const GuestBookApp = () => (
+	<div className = 'guestbook'>
+		Hello from GuestBookApp
+	</div>
+)
+
+ReactDOM.render(
+	<GuestBookApp />,
+	MOUNT
+);

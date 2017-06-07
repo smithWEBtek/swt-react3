@@ -6,7 +6,7 @@ const MOUNT = document.getElementById('root');
 const Hello = ({name}) => (
 	<div>Hello {name}!</div>
 )
-const names = ['Ned', 'Ted', 'Fred', 'Zed', 'Mary'];
+const names = ['Ned', 'Ted', 'Fred', 'Zed', 'Mary', 'Ned', 'Ted'];
 
 
 const App = () => (
@@ -19,8 +19,14 @@ const App = () => (
 	// </div>
 
 	// ...2nd way:
+	// also shows .map with index for unique keys
 	<div className='app'>
-		{names.map(name => <Hello name={name} key={name}/>)}
+		{names.map((name, index) => (
+			<Hello 
+				name={name} 
+				key={name+index} />
+			)
+		)}
 	</div>
 )
 
